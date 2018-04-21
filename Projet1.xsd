@@ -17,13 +17,13 @@
 
 <element name="scientificProductsDepartement">
   <complexType>
-    <element name="book" type="p1:scientificBook" maxOccurs="unbounded">
+    <element name="book" type="p1:scientificBook" maxOccurs="unbounded"/>
   </complexType>
 </element>
 
 <!-- ======================= Start of books ======================= -->
 
-<complexType = "commonBookInformations">
+<complexType name="commonBookInformations">
   <sequence>
     <element name="title" type="string"/>
     <element name="publisher" type="string"/>
