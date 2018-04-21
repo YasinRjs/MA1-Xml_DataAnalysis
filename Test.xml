@@ -12,6 +12,7 @@
       <yearOfPublication> 2020 </yearOfPublication>
       <author> Yasin </author>
       <author> Jacky </author>
+      <editor>Jalal</editor>
       <edition> Fortnite </edition>
     </book>
     <book>
@@ -20,8 +21,8 @@
       <yearOfPublication> 2022 </yearOfPublication>
       <editor> Yasin2 </editor>
       <editor> Jacky2 </editor>
-      <edition> Fortnite </edition>
       <abstract> Draré on saute à pleasant park </abstract>
+      <edition> Fortnite </edition>
     </book>
   </scientificProductsDepartement>
 
