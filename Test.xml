@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<bookshop xmlns="http://www.xml.project1.ulb.ac.be"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.xml.project1.ulb.ac.be
+            Projet1.xsd">
+
+  <scientificProductsDepartement>
+    <book>
+      <title> La Base </title>
+      <publisher> Yasin </publisher>
+      <yearOfPublication> 2020 </yearOfPublication>
+      <author> Yasin </author>
+      <author> Jacky </author>
+      <edition> Fortnite </edition>
+    </book>
+    <book>
+      <title> Pleasant Park </title>
+      <publisher> Jacky </publisher>
+      <yearOfPublication> 2022 </yearOfPublication>
+      <editor> Yasin2 </editor>
+      <editor> Jacky2 </editor>
+      <edition> Fortnite </edition>
+      <abstract> Draré on saute à pleasant park </abstract>
+    </book>
+  </scientificProductsDepartement>
+
+  <leisureProductsDepartement>
+    <book genre="thriller">
+      <title> this is a leisurebook </title>
+      <publisher> Yasin </publisher>
+      <yearOfPublication> 2020 </yearOfPublication>
+      <author> Qqun </author>
+      <edition>ta mere</edition>
+      <pages> 1235423 </pages>
+    </book>
+  </leisureProductsDepartement>
+</bookshop>
