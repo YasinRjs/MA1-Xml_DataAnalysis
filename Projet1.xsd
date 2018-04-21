@@ -1,0 +1,75 @@
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:p1="http://www.xml.project1.ulb.ac.be"
+        targetNamespace="http://www.xml.project1.ulb.ac.be"
+        elementFormDefault="qualified">
+
+<element name= "bookshop">
+  <complexType>
+    <sequence>
+      <!-- No need MaxOccurs MinOccurs, both default 1 -->
+      <all>
+        <element ref="p1:scientificProductsDepartement"/>
+        <element ref="p1:leisureProductsDepartement"/>
+      </all>
+    </sequence>
+  </complexType>
+</element>
+
+<element name="scientificProductsDepartement">
+  <complexType>
+    <element name="book" type="p1:scientificBook" maxOccurs="unbounded">
+  </complexType>
+</element>
+
+<!-- ======================= Start of books ======================= -->
+
+<complexType = "commonBookInformations">
+  <sequence>
+    <element name="title" type="string"/>
+    <element name="publisher" type="string"/>
+    <element name="yearOfPublication" type="positiveInteger"/>
+  </sequence>
+</complexType>
+
+<complexType name="scientificBook">
+  <complexContent>
+    <extension base="p1:commonBookInformations">
+      <sequence>
+        <choice> <!-- à vérifier -->
+          <element name="author" type="string" maxOccurs="unbounded"/>
+          <element name="editor" type="string" maxOccurs="unbounded"/>
+        </choice>
+        <element name="abstract" type="string" use="optional"/>
+        <element name="edition" type="string" use="optional"/>
+        <element name="isbn" type="string" use="optional"/>
+      </sequence>
+    </extension>
+  </complexContent>
+</complexType>
+
+<complexType name="leisureBook">
+  <complexContent>
+    <extension base="p1:commonBookInformations">
+      <sequence>
+        <element name="author" type="string" maxOccurs="unbounded"/>
+        <element name="edition" type="string" use="optional"/>
+        <element name="pages" type="positiveInteger" use="optional"/>
+        <attribute name="genre" type="possibleGenre"/>
+      </sequence>
+    </extension>
+  </complexContent>
+</complexType>
+
+
+<!-- A check -->
+<simpleType name="possibleGenre">
+  <restriction base="string">
+    <enumeration value="thriller"/>
+    <enumeration value="horror"/>
+    <enumeration value="sci/fi"/>
+    <enumeration value="romance"/>
+    <enumeration value="literature"/>
+  </restriction>
+</simpleType>
+
+  </schema>
