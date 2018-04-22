@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<bookshop xmlns="http://www.xml.project1.ulb.ac.be"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.xml.project1.ulb.ac.be
+            Projet1.xsd">
+
+  <scientificProductsDepartement>
+  </scientificProductsDepartement>
+
+  <leisureProductsDepartement>
+    <book genre="thriller">
+      <title> this is a leisurebook </title>
+      <publisher> Yasin </publisher>
+      <yearOfPublication> 2020 </yearOfPublication>
+      <author> Qqun </author>
+      <edition>Gentil</edition>
+      <pages> 1235423 </pages>
+    </book>
+
+    <book genre="horror">
+      <title> XML is life </title>
+      <publisher> ULB </publisher>
+      <yearOfPublication> 2018 </yearOfPublication>
+      <author> Stijn Vansummeren </author>
+      <pages> 145 </pages>
+    </book>
+
+    <periodical>
+      <title> Koh-Lanta </title>
+      <price> 100 </price>
+      <publisher> TF1 </publisher>
+    </periodical>
+  </leisureProductsDepartement>
+
+
+</bookshop>

@@ -1,0 +1,161 @@
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:p1="http://www.xml.project1.ulb.ac.be"
+        targetNamespace="http://www.xml.project1.ulb.ac.be"
+        elementFormDefault="qualified">
+
+  <element name= "bookshop">
+    <complexType>
+      <sequence>
+          <element ref="p1:scientificProductsDepartement"/>
+          <element ref="p1:leisureProductsDepartement"/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name="scientificProductsDepartement">
+    <complexType>
+        <sequence>
+            <element name="book" type="p1:scientificBook" minOccurs="0" maxOccurs="unbounded"/>
+            <element ref="p1:journal" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+  </element>
+
+  <element name="leisureProductsDepartement">
+    <complexType>
+        <sequence>
+            <element name="book" type="p1:leisureBook" minOccurs="0" maxOccurs="unbounded"/>
+            <element ref="p1:periodical" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+  </element>
+
+  <!-- ======================= Start of books ======================= -->
+
+  <complexType name="commonBookInformations">
+    <sequence>
+      <element name="title" type="string"/>
+      <element name="publisher" type="string"/>
+      <element name="yearOfPublication" type="positiveInteger"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="scientificBook">
+    <complexContent>
+      <extension base="p1:commonBookInformations">
+        <sequence>
+          <choice>
+            <element name="author" type="string" maxOccurs="unbounded"/>
+            <element name="editor" type="string" maxOccurs="unbounded"/>
+          </choice>
+          <element name="abstract" type="string" minOccurs="0"/>
+          <element name="edition" type="string" minOccurs="0"/>
+          <element name="isbn" type="string" minOccurs="0"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <complexType name="leisureBook">
+    <complexContent>
+      <extension base="p1:commonBookInformations">
+        <sequence>
+          <element name="author" type="string" maxOccurs="unbounded"/>
+          <element name="edition" type="string" minOccurs="0"/>
+          <element name="pages" type="positiveInteger" minOccurs="0"/>
+        </sequence>
+        <attribute name="genre" type="p1:possibleGenre" use="required"/>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <simpleType name="possibleGenre">
+    <restriction base="string">
+      <enumeration value="thriller"/>
+      <enumeration value="horror"/>
+      <enumeration value="sci/fi"/>
+      <enumeration value="romance"/>
+      <enumeration value="literature"/>
+    </restriction>
+  </simpleType>
+
+  <!-- ======================= Start of journals ======================= -->
+
+  <element name="periodical">
+    <complexType>
+      <sequence>
+        <element name="title" type="string"/>
+        <element name="price" type="p1:strictlyPositiveDecimal"/>
+        <element name="publisher" type="string"/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <simpleType name="strictlyPositiveDecimal">
+    <restriction base="decimal">
+      <fractionDigits	value="2"/>
+      <minExclusive value="0"/>
+    </restriction>
+  </simpleType>
+
+  <element name="journal">
+    <complexType>
+      <sequence>
+        <element name="title" type="string"/>
+        <element name="volume" type="positiveInteger"/>
+        <element name="number" type="positiveInteger"/>
+        <choice>
+          <element name="editor" type="string" maxOccurs="unbounded"/>
+          <element name="author" type="string" maxOccurs="unbounded"/>
+        </choice>
+        <element name="yearOfPublication" type="positiveInteger"/>
+        <element name="publisher" type="string" minOccurs="0"/>
+        <element ref="p1:impactFactor" minOccurs="0"/>
+        <element ref="p1:tableOfContents"/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name="impactFactor">
+    <complexType>
+      <sequence>
+        <element name="name" type="string"/>
+        <element name="year" type="positiveInteger"/>
+      </sequence>
+    </complexType>
+  </element>
+
+
+  <element name="tableOfContents">
+    <complexType>
+      <sequence>
+        <element ref="p1:article" maxOccurs="unbounded"/>
+      </sequence>
+    </complexType>
+  </element>
+
+
+  <element name="article">
+    <complexType>
+      <sequence>
+        <element name="title" type="string"/>
+        <element name="author" type="string" maxOccurs="unbounded"/>
+        <choice>
+            <sequence>
+              <element name="start" type="positiveInteger"/>
+              <element name="end" type="positiveInteger"/>
+            </sequence>
+          <element name="articleNumber" type="positiveInteger"/>
+        </choice>
+      </sequence>
+    </complexType>
+  </element>
+
+  <complexType name="pageRange">
+    <sequence>
+      <element name="start" type="positiveInteger"/>
+      <element name="end" type="positiveInteger"/>
+    </sequence>
+  </complexType>
+
+</schema>
