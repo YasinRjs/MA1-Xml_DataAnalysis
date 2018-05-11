@@ -129,6 +129,7 @@
                                 </xsl:choose>
                                 <td>
                                     <xsl:for-each select="./author | ./editor">
+                                        <xsl:sort select="replace(.,'.*\s','')"/>
                                         <xsl:sort select="."/>
                                         <xsl:variable name="currentAuthor" select="."/>
                                         <xsl:choose>
@@ -233,6 +234,7 @@
                 <xsl:otherwise>
                     <table border="1">
                         <xsl:for-each select="$coAuthors">
+                            <xsl:sort select="replace(.,'.*\s','')"/>
                             <xsl:sort select="."/>
                             <xsl:variable name="coAuthor" select="."/>
                             <xsl:if test="$author != $coAuthor">
