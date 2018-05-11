@@ -169,11 +169,15 @@
         <xsl:text>&#xa;</xsl:text>
         <xsl:choose>
             <xsl:when test="name($work) = 'article'">
+                <xsl:variable name="refname" select="concat(journal,' ',volume,'(',number,')')"/>
                 <xsl:call-template name="create-url">
                     <xsl:with-param name="url" select="url"/>
-                    <xsl:with-param name="refname" select="journal"/>
+                    <xsl:with-param name="refname" select="$refname"/>
                 </xsl:call-template>
-                <xsl:text>:</xsl:text>
+                <xsl:text>: </xsl:text>
+                <i><xsl:value-of select="pages"/> </i>
+                (<xsl:value-of select="year"/>)
+
             </xsl:when>
             <xsl:when test="name($work) = 'inproceedings' or name($work)='incollection'">
                 <xsl:variable name="ref" select="concat(booktitle,' ',year)"/>
@@ -181,28 +185,61 @@
                     <xsl:with-param name="url" select="url"/>
                     <xsl:with-param name="refname" select="$ref"/>
                 </xsl:call-template>
-                <xsl:text>:</xsl:text>
+                <xsl:text>: </xsl:text>
+                <i><xsl:value-of select="pages"/> </i>
+
             </xsl:when>
-            <xsl:when test="name($work)='proceedings'">
-                <xsl:variable name="ref" select="concat(booktitle,' ',year)"/>
-                <xsl:call-template name="create-url">
-                    <xsl:with-param name="url" select="url"/>
-                    <xsl:with-param name="refname" select="$ref"/>
-                </xsl:call-template>
+            <xsl:when test="name($work)='proceedings' or name($work)='book'">
+                <xsl:if test="series">
+                    <xsl:choose>
+                        <xsl:when test="series/@href">
+                            <xsl:call-template name="create-url">
+                                <xsl:with-param name="url" select="series/@href"/>
+                                <xsl:with-param name="refname" select="series"/>
+                            </xsl:call-template>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="series"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <xsl:text> </xsl:text>
+                </xsl:if>
+                <xsl:if test="volume">
+                    <xsl:value-of select="volume"/>
+                    <xsl:text>, </xsl:text>
+                </xsl:if>
+                <xsl:value-of select="publisher"/>
                 <xsl:text> </xsl:text>
+                <xsl:value-of select="year"/>
+                <xsl:text>, </xsl:text>
+
+                ISBN <xsl:value-of select="isbn"/>
+                <xsl:text> </xsl:text>
+                <xsl:if test="url">
+                    [<xsl:call-template name="create-url">
+                        <xsl:with-param name="url" select="url"/>
+                        <xsl:with-param name="refname" select="'content'"/>
+                    </xsl:call-template>]
+                </xsl:if>
+            </xsl:when>
+
+            <xsl:when test="name($work)='phdthesis' or name($work)='mastersthesis'">
+                <xsl:variable name="refname" select="concat(school,' ',year)"/>
+                <xsl:choose>
+                    <xsl:when test="url">
+                        <xsl:call-template name="create-url">
+                            <xsl:with-param name="url" select="url"/>
+                            <xsl:with-param name="refname" select="$refname" />
+                        </xsl:call-template>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="$refname"/>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:when>
 
         </xsl:choose>
-        <xsl:if test="pages">
-            <i><xsl:value-of select="pages"/></i>
-        </xsl:if>
-        <xsl:if test="publisher">
-            <xsl:value-of select="publisher"/>
-            <xsl:text>,</xsl:text>
-        </xsl:if>
-        <xsl:if test="isbn">
-            ISBN <xsl:value-of select="isbn"/>
-        </xsl:if>
+
     </xsl:template>
 
 
